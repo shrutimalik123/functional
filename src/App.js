@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
+  const [number, setNumber] = useState("");
+  const [operator, setOperator] = useState("");
+  const [result, setResult] = useState("");
+
+  const handleNumber = (e) => {
+    setNumber(e.target.value);
+  };
+
+  const handleOperator = (e) => {
+    setOperator(e.target.value);
+  };
+
+  const handleEqual = () => {
+    const expression = `${number} ${operator}`;
+    setResult(eval(expression));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input
+        type="number"
+        placeholder="Number"
+        value={number}
+        onChange={handleNumber}
+      />
+      <select value={operator} onChange={handleOperator}>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <button onClick={handleEqual}>Equal</button>
+      <div>Result: {result}</div>
     </div>
   );
-}
+};
 
 export default App;
